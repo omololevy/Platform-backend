@@ -1,8 +1,19 @@
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render
+from django.db.models.query import QuerySet
+from django.http import JsonResponse, Http404
+from .serializers import   UserProfileSerializer, UserSerializer
+from .permissions import IsAdminOrReadOnly
 from .models import Profile
-from rest_framework import viewsets
-from rest_framework import permissions
-from .serializers import UserSerializer,UserProfileSerializer
+from rest_framework import viewsets, status, generics, permissions, serializers
+from rest_framework.exceptions import NotFound
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.settings import perform_import
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from decouple import config, Csv
+import africastalking
 
 
 class UserViewSet(viewsets.ModelViewSet):
