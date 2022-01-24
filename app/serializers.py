@@ -11,7 +11,12 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     def create(self,validated_data):
         user = User.objects.create_user(**validated_data)
+
+        print(validated_data)
+        print('Hello')
         return user
+
+    
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
