@@ -12,5 +12,5 @@ router.register(r'profile', views.UserProfileViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', ObtainAuthToken.as_view()),
-    path('profile/',views.UserProfileSerializer)
+    path('profile/', views.UserProfileSerializer)
 ]
