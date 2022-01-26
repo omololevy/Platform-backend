@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Profile
+from .models import Profile,PublicCohort
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -12,11 +12,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     def create(self,validated_data):
         user = User.objects.create_user(**validated_data)
 
-        print(validated_data)
-        print('Hello')
-        return user
-
-    
+        # print(validated_data)
+        # print('Hello')
+        return user    
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -26,3 +24,13 @@ class UserProfileSerializer(serializers.ModelSerializer):
     def create_profile(self,data):
         profile = Profile.objects.create_profile(**data)
         return profile
+
+class PublicCohortSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PublicCohort
+        fields = ('name','description')
+        read_only_fields = ('owner', 'date_created', 'date_updated','created_by')
+    
+    def create_public_cohort(self,cohort_data):
+        public_cohort = PublicCohort.objects.create_public_cohort(**cohort_data)
+        return public_cohort
