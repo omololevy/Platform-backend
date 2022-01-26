@@ -6,7 +6,7 @@ from cloudinary.models import CloudinaryField
 # Create your models here.
 
 class Profile(models.Model):
-    profile_pic = CloudinaryField(null=True)
+    profile_pic = CloudinaryField('profile_photos/', default='http://res.cloudinary.com/dim8pysls/image/upload/v1639001486/x3mgnqmbi73lten4ewzv.png')
     bio = models.TextField(max_length=100)
     first_name = models.CharField(max_length=20)
     second_name = models.CharField(max_length=20,null=True)
