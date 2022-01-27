@@ -19,7 +19,7 @@ class Profile(models.Model):
         return self.first_name
 
 
-class PublicCohort(models.Model):
+class Cohort(models.Model):
     name = models.CharField(max_length=128 ,unique=True)
     description = models.TextField(null=True, blank=True)
     created_by = models.CharField(max_length=128)
@@ -29,4 +29,3 @@ class PublicCohort(models.Model):
 
     def __str__(self):
         return '{}-{}'.format(self.name, self.description)
-    
