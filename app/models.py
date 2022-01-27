@@ -10,18 +10,17 @@ class Profile(models.Model):
     profile_pic = CloudinaryField(null=True)
     bio = models.TextField(max_length=100)
     first_name = models.CharField(max_length=20)
-    second_name = models.CharField(max_length=20,null=True)
+    second_name = models.CharField(max_length=20, null=True)
     tel_number = models.CharField(max_length=14)
     email = models.EmailField(null=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE,null=True)
-
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.first_name
 
 
-class Cohort(models.Model):
-    name = models.CharField(max_length=128 ,unique=True)
+class PublicCohort(models.Model):
+    name = models.CharField(max_length=128, unique=True)
     description = models.TextField(null=True, blank=True)
     created_by = models.CharField(max_length=128)
     date_created = models.DateTimeField(auto_now=True)
@@ -30,3 +29,20 @@ class Cohort(models.Model):
 
     def __str__(self):
         return '{}-{}'.format(self.name, self.description)
+
+
+class privateCohort(models.Model):
+
+    class Meta:
+        verbose_name_plural = 'private Cohort'
+        verbose_name = 'private Cohort'
+        ordering = ["timestamp"]
+    timestamp = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(blank=True, null=True)
+    name = models.CharField(verbose_name="Name", max_length=100)
+    description = models.TextField(null=True, blank=True)
+    message = models.TextField(verbose_name="Message")
+    created_by = models.CharField(max_length=128)
+
+    def __str__(self):
+        return f'{self.name}'

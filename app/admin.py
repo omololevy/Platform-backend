@@ -1,7 +1,9 @@
 from django.contrib import admin
 
 
-from .models import Cohort
-
+from .models import privateCohort
+from .models import PublicCohort
 # Register your models here.
-admin.site.register(Cohort)
+
+admin.site.register(privateCohort)
+admin.site.register(PublicCohort)

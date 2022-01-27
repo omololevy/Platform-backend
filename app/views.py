@@ -1,9 +1,9 @@
 from django.contrib.auth.models import User
-from .models import Profile, Cohort
+from .models import Profile, PublicCohort
 from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework.authentication import TokenAuthentication
-from .serializers import UserSerializer, UserProfileSerializer, CohortSerializer
+from .serializers import UserSerializer, UserProfileSerializer, PublicCohortSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -24,10 +24,10 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class CohortViewSet(viewsets.ModelViewSet):
+class PublicCohortViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows public cohorts to be created.
     """
-    queryset = Cohort.objects.all().order_by('-id')
-    serializer_class = CohortSerializer
+    queryset = PublicCohort.objects.all().order_by('-id')
+    serializer_class = PublicCohortSerializer
     # permission_classes = [permissions.IsAuthenticated]
