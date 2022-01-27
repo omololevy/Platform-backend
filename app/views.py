@@ -20,7 +20,7 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     """
     queryset = Profile.objects.all().order_by('-id')
     serializer_class = UserProfileSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
 
 class PublicCohortViewSet(viewsets.ModelViewSet):
     """
