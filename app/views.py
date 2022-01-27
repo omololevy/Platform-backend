@@ -1,20 +1,33 @@
-from django.shortcuts import render
-from django.contrib.auth import get_user_model
-from django.shortcuts import render, get_object_or_404
-from .models import Chat, Contact
-
-User = get_user_model()
-
-
-def get_last_10_messages(chatId):
-    chat = get_object_or_404(Chat, id=chatId)
-    return chat.messages.order_by('-timestamp').all()[:10]
+from django.contrib.auth.models import User
+from .models import Profile, Cohort
+from rest_framework import viewsets
+from rest_framework import permissions
+from rest_framework.authentication import TokenAuthentication
+from .serializers import UserSerializer, UserProfileSerializer, CohortSerializer
 
 
-def get_user_contact(username):
-    user = get_object_or_404(User, username=username)
-    return get_object_or_404(Contact, user=user)
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
+    authentication_classes = (TokenAuthentication,)
 
 
-def get_current_chat(chatId):
-    return get_object_or_404(Chat, id=chatId)
+class UserProfileViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Profile.objects.all().order_by('-id')
+    serializer_class = UserProfileSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class CohortViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows public cohorts to be created.
+    """
+    queryset = Cohort.objects.all().order_by('-id')
+    serializer_class = CohortSerializer
+    # permission_classes = [permissions.IsAuthenticated]
