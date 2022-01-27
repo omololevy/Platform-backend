@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Profile,PublicCohort
+from .models import Profile,PublicCohort,Fundraiser
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -34,3 +34,13 @@ class PublicCohortSerializer(serializers.ModelSerializer):
     def create_public_cohort(self,cohort_data):
         public_cohort = PublicCohort.objects.create_public_cohort(**cohort_data)
         return public_cohort
+class FundraiserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Fundraiser
+        fields = ('fund_name','content','start_date', 'end_date','created_by')
+        
+        def create_fundraiser(self,data):
+            Fundraiser = Fundraiser.objects.create_profile(**fundraiser_data)
+            return Fundraiser
+    
+        

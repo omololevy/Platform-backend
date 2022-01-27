@@ -7,6 +7,7 @@ router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'profile', views.UserProfileViewSet)
 router.register(r'public-cohort',views.PublicCohortViewSet)
+router.register(r'fundraiser',views.FundraiserViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
@@ -15,4 +16,5 @@ urlpatterns = [
     path('api-auth/', ObtainAuthToken.as_view()),
     path('profile/',views.UserProfileSerializer),
     path('public-cohort/',views.PublicCohortSerializer),
+    path('fundraiser/',views.FundraiserSerializer),
 ]
