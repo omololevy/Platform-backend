@@ -34,8 +34,7 @@ class PublicCohort(models.Model):
 class privateCohort(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     date_updated = models.DateTimeField(blank=True, null=True)
-    name = models.CharField(verbose_name="Name",
-                            max_length=100, blank=True, null=True)
+    name = models.CharField(verbose_name="Name", max_length=100, blank=True, null=True)
     description = models.TextField(null=True, blank=True)
     message = models.TextField(verbose_name="Message", blank=True, null=True)
     created_by = models.CharField(max_length=128, blank=True, null=True)
