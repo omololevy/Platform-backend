@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Profile, PublicCohort
+from .models import Profile, PublicCohort, privateCohort
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -39,5 +39,10 @@ class PublicCohortSerializer(serializers.ModelSerializer):
         public_cohort = PublicCohort.objects.create_public_cohort(
             **cohort_data)
         return public_cohort
-    
-    
+
+
+class PrivateCohortSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = privateCohort
+        fields = ('timestamp', 'date_updated', 'name',
+                  'description', 'message', 'created_by')

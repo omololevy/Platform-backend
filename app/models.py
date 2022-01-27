@@ -32,17 +32,13 @@ class PublicCohort(models.Model):
 
 
 class privateCohort(models.Model):
-
-    class Meta:
-        verbose_name_plural = 'private Cohort'
-        verbose_name = 'private Cohort'
-        ordering = ["timestamp"]
-    timestamp = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     date_updated = models.DateTimeField(blank=True, null=True)
-    name = models.CharField(verbose_name="Name", max_length=100)
+    name = models.CharField(verbose_name="Name",
+                            max_length=100, blank=True, null=True)
     description = models.TextField(null=True, blank=True)
-    message = models.TextField(verbose_name="Message")
-    created_by = models.CharField(max_length=128)
+    message = models.TextField(verbose_name="Message", blank=True, null=True)
+    created_by = models.CharField(max_length=128, blank=True, null=True)
 
     def __str__(self):
         return f'{self.name}'
