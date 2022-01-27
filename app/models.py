@@ -45,8 +45,8 @@ class Fundraiser(models.Model):
     fund_name = models.CharField(max_length=30, unique=True)  
     created_by = models.ForeignKey(User,null=True, on_delete=models.CASCADE)
     content = models.TextField(null=True)
-    start_date = models.DateTimeField(auto_now=True)  
-    end_date = models.DateTimeField(auto_now=True)
+    start_date = models.DateTimeField()  
+    end_date = models.DateTimeField()
     
     def __str__(self):
         return '{}-{}'.format(self.fund_name, self.content)
