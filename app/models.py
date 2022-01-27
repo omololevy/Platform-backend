@@ -13,7 +13,7 @@ class Profile(models.Model):
     second_name = models.CharField(max_length=20, null=True)
     tel_number = models.CharField(max_length=14)
     email = models.EmailField(null=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,null=True)
 
     def __str__(self):
         return self.first_name
@@ -28,16 +28,28 @@ class PublicCohort(models.Model):
     private = models.BooleanField(default=False)
 
     def __str__(self):
-        return '{}-{}'.format(self.name, self.description)
+        return '{} - {}'.format(self.name, self.description)
 
-
-class privateCohort(models.Model):
-    timestamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    date_updated = models.DateTimeField(blank=True, null=True)
-    name = models.CharField(verbose_name="Name", max_length=100, blank=True, null=True)
-    description = models.TextField(null=True, blank=True)
-    message = models.TextField(verbose_name="Message", blank=True, null=True)
-    created_by = models.CharField(max_length=128, blank=True, null=True)
+class PrivateCohort(models.Model):
+    name = models.CharField(unique=True, max_length=100, null=True)
+    timestamp = models.DateTimeField(auto_now_add=True, null=True)
+    date_updated = models.DateTimeField( null=True)
+    description = models.TextField(null=True)
+    message = models.TextField(verbose_name="Message",null=True)
+    created_by = models.ForeignKey(User,null=True,on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.name}'
+        return '{} - {}'.format(self.name, self.created_by)
+
+class Fundraiser(models.Model):
+    fund_name = models.CharField(max_length=30, unique=True)  
+    created_by = models.ForeignKey(User,null=True, on_delete=models.CASCADE)
+    content = models.TextField(null=True)
+    start_date = models.DateTimeField(auto_now=True)  
+    end_date = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return '{}-{}'.format(self.fund_name, self.content)
+
+
+    
