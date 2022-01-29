@@ -22,10 +22,11 @@ class Profile(models.Model):
 class PublicCohort(models.Model):
     name = models.CharField(max_length=128, unique=True)
     description = models.TextField(null=True, blank=True)
-    created_by = models.CharField(max_length=128)
     date_created = models.DateTimeField(auto_now=True)
     date_updated = models.DateTimeField(auto_now_add=True)
     private = models.BooleanField(default=False)
+    # created_by = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+
 
     def __str__(self):
         return '{} - {}'.format(self.name, self.description)
