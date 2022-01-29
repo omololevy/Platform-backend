@@ -24,4 +24,16 @@ urlpatterns = [
 
     path('fundraiser/',views.FundraiserSerializer),
     path('privatecohort/', views. PrivateCohortSerializer),
+
+    path('profiles/', views.ProfileList.as_view()), # list of profiles
+    path('profiles/<pk>[0-9]+/', views.ProfileDetail.as_view()), # single profile
+    path('users/', views.UserList.as_view()), # list of users
+    path('users/create/', views.UserCreate.as_view()), # create user
+    path('auth/login/', views.loginUser.as_view()), # login user
+    path('auth/logout/', views.logoutUser.as_view()), # logout user
+    # path('/vaccine/', views.VaccineList.as_view(), name="vaccines"),
+    # path('medicalhistory/', views.MedicalHistoryList.as_view(), name="medicalHistory"),
+    # path('growth/', views.GrowthList.as_view(), name="growth"),
+    # path('vaccines/<int:pk>/', views.VaccineDetail.as_view(), name="vaccines_detail"),
+    path('send-message',views.SendSmsMessage.as_view(),name="sms-message")
 ]
