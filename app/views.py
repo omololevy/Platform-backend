@@ -1,18 +1,15 @@
 from django.contrib.auth.models import User
+from django.shortcuts import render
 from .models import PrivateCohort, Profile,PublicCohort,Fundraiser
 from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework.authentication import TokenAuthentication 
-from .serializers import UserSerializer,UserProfileSerializer,PublicCohortSerializer
+from .serializers import UserSerializer,UserProfileSerializer,PublicCohortSerializer,FundraiserSerializer,PrivateCohortSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
-
 from rest_framework import status,generics
-
 # authentication
 from django.contrib.auth import authenticate, login, logout
-from .serializers import UserSerializer,UserProfileSerializer,PublicCohortSerializer,FundraiserSerializer,PrivateCohortSerializer
-
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
@@ -26,7 +23,7 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     """
     queryset = Profile.objects.all().order_by('-id')
     serializer_class = UserProfileSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
 
 
 class PublicCohortViewSet(viewsets.ModelViewSet):
@@ -37,11 +34,11 @@ class PublicCohortViewSet(viewsets.ModelViewSet):
     serializer_class = PublicCohortSerializer
     # permission_classes = [permissions.IsAuthenticated]
 
-    # logout user ====================================
 class logoutUser(APIView): # logout user
     def get(self, request, format=None):
         logout(request)
         return Response(status=status.HTTP_200_OK)
+
 class FundraiserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows public cohorts to be created.
