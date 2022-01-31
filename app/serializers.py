@@ -27,6 +27,15 @@ class UserProfileSerializer(serializers.ModelSerializer):
         profile = Profile.objects.create_profile(**data)
         return profile
 
+    def update_profile(self, instance, data):
+        instance.first_name = data.get('first_name', instance.first_name)
+        instance.second_name = data.get('second_name', instance.second_name)
+        instance.email = data.get('email', instance.email)
+        instance.bio = data.get('bio', instance.bio)
+        instance.tel_number = data.get('tel_number', instance.tel_number)
+        instance = super().update(instance, data)
+        return instance
+
 
 class PublicCohortSerializer(serializers.ModelSerializer):
     class Meta:
