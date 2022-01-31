@@ -1,5 +1,5 @@
 import os
-import django_heroku
+# import django_heroku
 from pathlib import Path
 from decouple import config
 import dj_database_url
@@ -168,7 +168,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # LOGIN_REDIRECT_URL='/profile/'
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
