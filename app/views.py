@@ -27,6 +27,18 @@ class CustomAuthToken(ObtainAuthToken):
             'user_id': user.pk,
             'email': user.email
         })
+class ProfileUpdateView(generics.GenericAPIView):
+    # permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = UserProfileSerializer
+    lookup_field = 'email'
+    queryset = Profile.objects.all()
+
+    def put(self, request, *args, **kwargs):
+        serializer = UserProfileSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
