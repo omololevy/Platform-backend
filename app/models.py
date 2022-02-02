@@ -52,5 +52,14 @@ class Fundraiser(models.Model):
     def __str__(self):
         return '{}-{}'.format(self.fund_name, self.content)
 
+class BlogPost(models.Model):
+    title = models.CharField(max_length=150)
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE,)
+    body = models.TextField()
+    # username = models.ForeignKey(User, on_delete=models.CASCADE)
+    post_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
 
     
