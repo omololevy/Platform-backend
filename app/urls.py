@@ -10,6 +10,7 @@ router.register(r'profile', views.UserProfileViewSet)
 router.register(r'public-cohort',views.PublicCohortViewSet)
 router.register(r'fundraiser',views.FundraiserViewSet)
 router.register(r'private-cohort', views. PrivateCohortViewSet)
+router.register(r'post', views. postViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
@@ -23,4 +24,5 @@ urlpatterns = [
     path('api/auth/logout/', views.logoutUser.as_view()),
     path('fundraiser/',views.FundraiserSerializer),
     path('privatecohort/', views. PrivateCohortSerializer),
+    path('post/', views. PostSerializer)
 ]
