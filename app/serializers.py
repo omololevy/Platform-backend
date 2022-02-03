@@ -71,15 +71,15 @@ class FundraiserSerializer(serializers.ModelSerializer):
         fields = ('fund_name','content','start_date', 'end_date','created_by')
         
     def create_fundraiser(self,fundraiser_data):
-        fundraiser = Fundraiser.objects.create_profile(**fundraiser_data)
+        fundraiser = Fundraiser.objects.create_fundraiser(**fundraiser_data)
         return fundraiser
 
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ('title', 'post', 'image', 'created_at')
+        fields = ('title', 'post')
         
     def create_post(self, post_data):
-        post = Post.objects.create_profile(**post_data)
+        post = Post.objects.create_post(**post_data)
         return post
