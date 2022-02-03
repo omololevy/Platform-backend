@@ -19,6 +19,7 @@ urlpatterns = [
     # path('api-auth/', ObtainAuthToken.as_view()),
     path('profile/',views.UserProfileSerializer),
     path('update_profile/' ,views.ProfileUpdateView.as_view()),
+    path('profile/',views.GetProfile.as_view()),
     path('public-cohort/',views.PublicCohortSerializer),
     path('api/auth/logout/', views.logoutUser.as_view()),
     path('fundraiser/',views.FundraiserSerializer),
