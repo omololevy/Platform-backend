@@ -101,6 +101,6 @@ class PrivateCohortViewSet(viewsets.ModelViewSet):
     serializer_class = PrivateCohortSerializer
     
     
-class postViewSet(viewsets.ModelViewSet):
-    queryset = Post.objects.all()
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all().order_by('-id')
     serializer_class = PostSerializer
