@@ -9,8 +9,8 @@ router.register(r'users', views.UserViewSet)
 router.register(r'profile', views.UserProfileViewSet)
 router.register(r'public-cohort',views.PublicCohortViewSet)
 router.register(r'fundraiser',views.FundraiserViewSet)
-router.register(r'private-cohort', views. PrivateCohortViewSet)
-router.register(r'post', views. postViewSet)
+router.register(r'private-cohort', views.PrivateCohortViewSet)
+router.register(r'post', views.PostViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
