@@ -18,6 +18,11 @@ class Profile(models.Model):
     def __str__(self):
         return '{} - {}'.format(self.first_name, self.bio)
 
+    @classmethod
+    def get_profile(cls,id):
+        user_profile = Profile.objects.filter(user__pk = id)
+        return user_profile
+
 
 class PublicCohort(models.Model):
     name = models.CharField(max_length=128, unique=True)
@@ -26,6 +31,7 @@ class PublicCohort(models.Model):
     date_updated = models.DateTimeField(auto_now_add=True)
     private = models.BooleanField(default=False)
     # created_by = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+
 
 
     def __str__(self):
