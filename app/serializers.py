@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Profile,PublicCohort,Fundraiser,PrivateCohort
+from .models import Post, Profile, PublicCohort, Fundraiser, PrivateCohort
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -73,3 +73,13 @@ class FundraiserSerializer(serializers.ModelSerializer):
     def create_fundraiser(self,fundraiser_data):
         fundraiser = Fundraiser.objects.create_profile(**fundraiser_data)
         return fundraiser
+
+
+class PostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ('title', 'post', 'image', 'created_at')
+        
+    def create_post(self, post_data):
+        post = Post.objects.create_profile(**post_data)
+        return post
