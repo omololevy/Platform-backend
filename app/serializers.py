@@ -21,7 +21,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ('profile_pic', 'first_name', 'second_name',
+        fields = ('id','profile_pic', 'first_name', 'second_name',
                   'bio', 'tel_number', 'email', 'user')
 
     def create_profile(self, data):
@@ -50,9 +50,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
 class PublicCohortSerializer(serializers.ModelSerializer):
     class Meta:
         model = PublicCohort
-        fields = ('name', 'description')
-        read_only_fields = ('owner', 'date_created',
-                            'date_updated', 'created_by')
+        fields = ('id','name', 'description')
+        read_only_fields = ('date_created','date_updated', 'created_by')
 
     def create_public_cohort(self, cohort_data):
         public_cohort = PublicCohort.objects.create_public_cohort(
@@ -62,13 +61,12 @@ class PublicCohortSerializer(serializers.ModelSerializer):
 class PrivateCohortSerializer(serializers.ModelSerializer):
     class Meta:
         model = PrivateCohort
-        fields = ('timestamp', 'date_updated', 'name',
-                  'description', 'message', 'created_by')
+        fields = ('id','name','description','members')
 
 class FundraiserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Fundraiser
-        fields = ('fund_name','content','start_date', 'end_date','created_by')
+        fields = ('id','fund_name','content','start_date', 'end_date','created_by')
         
     def create_fundraiser(self,fundraiser_data):
         fundraiser = Fundraiser.objects.create_fundraiser(**fundraiser_data)
@@ -78,7 +76,7 @@ class FundraiserSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ('title', 'post')
+        fields = ('id','title', 'post')
         
     def create_post(self, post_data):
         post = Post.objects.create_post(**post_data)
