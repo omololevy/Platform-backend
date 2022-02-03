@@ -30,13 +30,24 @@ class CustomAuthToken(ObtainAuthToken):
             'user_id': user.pk,
             'email': user.email
         })
+
+class GetProfile(generics.GenericAPIView):
+    serializer_class = UserProfileSerializer
+    lookup_field = 'id'
+    queryset = Profile.objects.first()
+
+    def get(request):
+        serializer = UserProfileSerializer()
+        if serializer.is_valid():
+            serializer.get_fields()
+            return Response('hello')
+        return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
+
 class ProfileUpdateView(generics.GenericAPIView):
     # permission_classes = (permissions.IsAuthenticated,)
     serializer_class = UserProfileSerializer
     lookup_field = 'email'
     queryset = Profile.objects.all()
-
-    # def get()
   
     def put(self, request, *args, **kwargs):
         serializer = UserProfileSerializer(data=request.data)
@@ -57,6 +68,7 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     """
     queryset = Profile.objects.all().order_by('-id')
     serializer_class = UserProfileSerializer
+    # y = Profile.
     # permission_classes = [permissions.IsAuthenticated]
 
     # @api_view(['GET', 'PUT', 'DELETE'])
