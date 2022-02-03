@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Profile,PublicCohort,Fundraiser,PrivateCohort
+from .models import Post, Profile, PublicCohort, Fundraiser, PrivateCohort
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -11,13 +11,14 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
-
         # print(validated_data)
         # print('Hello')
         return user
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField(many=False)
+
     class Meta:
         model = Profile
         fields = ('profile_pic', 'first_name', 'second_name',
@@ -26,6 +27,15 @@ class UserProfileSerializer(serializers.ModelSerializer):
     def create_profile(self, data):
         profile = Profile.objects.create_profile(**data)
         return profile
+
+    def get_profile(self,instance,data):
+        instance.first_name = data.get('first_name', instance.first_name)
+        instance.second_name = data.get('second_name', instance.second_name)
+        instance.email = data.get('email', instance.email)
+        instance.bio = data.get('bio', instance.bio)
+        instance.tel_number = data.get('tel_number', instance.tel_number)
+        instance = super().get_fields(instance, data)
+        return instance
 
     def update_profile(self, instance, data):
         instance.first_name = data.get('first_name', instance.first_name)
@@ -61,5 +71,15 @@ class FundraiserSerializer(serializers.ModelSerializer):
         fields = ('fund_name','content','start_date', 'end_date','created_by')
         
     def create_fundraiser(self,fundraiser_data):
-        fundraiser = Fundraiser.objects.create_profile(**fundraiser_data)
+        fundraiser = Fundraiser.objects.create_fundraiser(**fundraiser_data)
         return fundraiser
+
+
+class PostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ('title', 'post')
+        
+    def create_post(self, post_data):
+        post = Post.objects.create_post(**post_data)
+        return post
