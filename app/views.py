@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.http import JsonResponse
 from django.shortcuts import render
 from .models import PrivateCohort, Profile,PublicCohort,Fundraiser
 from rest_framework import viewsets
@@ -13,6 +14,8 @@ from django.contrib.auth import authenticate, login, logout
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
+
+from app import serializers
 
 class CustomAuthToken(ObtainAuthToken):
 
@@ -33,6 +36,8 @@ class ProfileUpdateView(generics.GenericAPIView):
     lookup_field = 'email'
     queryset = Profile.objects.all()
 
+    # def get()
+  
     def put(self, request, *args, **kwargs):
         serializer = UserProfileSerializer(data=request.data)
         if serializer.is_valid():
@@ -54,6 +59,13 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     serializer_class = UserProfileSerializer
     # permission_classes = [permissions.IsAuthenticated]
 
+    # @api_view(['GET', 'PUT', 'DELETE'])
+    # def profile_detail(request, pk):
+    #     # find tutorial by pk (id)
+    #     try: 
+    #         profile = Profile.objects.get(pk=pk) 
+    #     except Profile.DoesNotExist: 
+    #         return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND) 
 
 class PublicCohortViewSet(viewsets.ModelViewSet):
     """

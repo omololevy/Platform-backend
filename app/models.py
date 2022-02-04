@@ -13,10 +13,10 @@ class Profile(models.Model):
     second_name = models.CharField(max_length=20, null=True)
     tel_number = models.CharField(max_length=14)
     email = models.EmailField(null=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE,null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
 
     def __str__(self):
-        return self.first_name
+        return '{} - {}'.format(self.first_name, self.bio)
 
 
 class PublicCohort(models.Model):

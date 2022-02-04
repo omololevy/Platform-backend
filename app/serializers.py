@@ -11,13 +11,14 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
-
         # print(validated_data)
         # print('Hello')
         return user
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField(many=False)
+
     class Meta:
         model = Profile
         fields = ('profile_pic', 'first_name', 'second_name',
@@ -40,7 +41,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 class PublicCohortSerializer(serializers.ModelSerializer):
     class Meta:
         model = PublicCohort
-        fields = ('name', 'description')
+        fields = ('id','name', 'description')
         read_only_fields = ('owner', 'date_created',
                             'date_updated', 'created_by')
 
@@ -52,13 +53,13 @@ class PublicCohortSerializer(serializers.ModelSerializer):
 class PrivateCohortSerializer(serializers.ModelSerializer):
     class Meta:
         model = PrivateCohort
-        fields = ('timestamp', 'date_updated', 'name',
+        fields = ('id','timestamp', 'date_updated', 'name',
                   'description', 'message', 'created_by')
 
 class FundraiserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Fundraiser
-        fields = ('fund_name','content','start_date', 'end_date','created_by')
+        fields = ('id','fund_name','content','start_date', 'end_date','created_by')
         
     def create_fundraiser(self,fundraiser_data):
         fundraiser = Fundraiser.objects.create_profile(**fundraiser_data)
