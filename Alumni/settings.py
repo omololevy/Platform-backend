@@ -47,7 +47,6 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -57,7 +56,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    
+
     'http://localhost:4200'
 ]
 
@@ -193,7 +192,7 @@ JAZZMIN_SETTINGS = {
     "welcome_sign": "Welcome to Moringa Alumni",
 
     # Copyright on the footer
-    "copyright": " Moringa Alumni Ltd",
+    "copyright": " Moringa Alumni copyright",
 
     # The model admin to search from the search bar, search bar omitted if excluded
     "search_model": "auth.User",
@@ -201,7 +200,7 @@ JAZZMIN_SETTINGS = {
     # Field name on user model that contains avatar ImageField/URLField/Charfield or a callable that receives the user
     "user_avatar": None,
 
-      ############
+    ############
     # Top Menu #
     ############
 
@@ -209,10 +208,12 @@ JAZZMIN_SETTINGS = {
     "topmenu_links": [
 
         # Url that gets reversed (Permissions can be added)
-        {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "Home",  "url": "admin:index",
+            "permissions": ["auth.view_user"]},
 
         # external url that opens in a new window (Permissions can be added)
-        {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
+        {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues",
+            "new_window": True},
 
         # model admin to link to (Permissions checked against model)
         {"model": "auth.User"},
@@ -221,13 +222,14 @@ JAZZMIN_SETTINGS = {
         {"app": "app"},
     ],
 
-     #############
+    #############
     # User Menu #
     #############
 
     # Additional links to include in the user menu on the top right ("app" url type is not allowed)
     "usermenu_links": [
-        {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
+        {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues",
+            "new_window": True},
         {"model": "auth.user"}
     ],
 
@@ -240,15 +242,15 @@ JAZZMIN_UI_TWEAKS = {
     "footer_small_text": False,
     "body_small_text": False,
     "brand_small_text": False,
-    "brand_colour": "navbar-success",
-    "accent": "accent-success",
-    "navbar": "navbar-light",
+    "brand_colour": "navbar-navy",
+    "accent": "accent-navy",
+    "navbar": "navbar-navy navbar-dark",
     "no_navbar_border": False,
     "navbar_fixed": False,
     "layout_boxed": False,
     "footer_fixed": True,
     "sidebar_fixed": True,
-    "sidebar": "sidebar-dark-success",
+    "sidebar": "sidebar-dark-navy",
     "sidebar_nav_small_text": False,
     "sidebar_disable_expand": False,
     "sidebar_nav_child_indent": False,
