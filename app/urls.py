@@ -25,5 +25,7 @@ urlpatterns = [
     path('api/auth/logout/', views.logoutUser.as_view()),
     path('fundraiser/',views.FundraiserSerializer),
     path('privatecohort/', views. PrivateCohortSerializer),
+
     path('post/', views. PostSerializer)
+
 ]
